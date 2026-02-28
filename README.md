@@ -195,3 +195,30 @@ uvicorn app.main:app --reload
 - Docker image: `backend/Dockerfile`
 - Render blueprint: `backend/render.yaml`
 - Fly.io app config: `backend/fly.toml`
+
+## Frontend Deployment (Vercel)
+
+The React + Vite app lives in `frontend/` and is configured for Vercel production deployment.
+
+### Prerequisites
+
+- Push this repository to GitHub.
+- Ensure your frontend API endpoint is available and set as `VITE_API_URL` in Vercel environment variables.
+
+### Deploy steps
+
+1. Go to [vercel.com](https://vercel.com) and sign in.
+2. Click **Add New Project** and import this GitHub repository.
+3. In project settings, set **Root Directory** to `frontend`.
+4. Configure build settings:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+5. Add environment variables (for example):
+   - `VITE_API_URL=https://your-api-domain.com`
+6. Deploy.
+
+Vite reads frontend variables with the `VITE_` prefix via `import.meta.env`, for example:
+
+```js
+const apiUrl = import.meta.env.VITE_API_URL;
+```

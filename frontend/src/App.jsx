@@ -19,13 +19,13 @@ const experienceOptions = ['Less than 1 year', '1-3 years', '3-5 years', '5+ yea
 
 export default function App() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#04070f] text-slate-100">
+    <main className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-[#04070f] text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="glow-orb glow-orb-primary" />
         <div className="glow-orb glow-orb-secondary" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-4xl items-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-12 sm:px-6 lg:px-10">
         <section className="card-elite w-full rounded-3xl border border-slate-800/70 p-6 shadow-2xl backdrop-blur-xl sm:p-10 animate-rise-in">
           <header className="text-center">
             <p className="inline-flex rounded-full border border-cyan-300/25 bg-cyan-400/10 px-4 py-1 text-xs font-medium uppercase tracking-[0.22em] text-cyan-200">

@@ -6,14 +6,33 @@ export function useMarketContext() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchContext().then(setContext).finally(() => setLoading(false));
+    let mounted = true;
+
+    fetchContext()
+      .then((data) => {
+        if (mounted) {
+          setContext(data);
+        }
+      })
+      .finally(() => {
+        if (mounted) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const saveContext = async (payload) => {
     setLoading(true);
-    const data = await updateContext(payload);
-    setContext(data);
-    setLoading(false);
+    try {
+      const data = await updateContext(payload);
+      setContext(data);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return { context, loading, saveContext };

@@ -29,3 +29,13 @@ class UniversalRiskEngine:
             'lot_size': adjusted_lots,
             'risk_capital': round(risk_capital, 2),
         }
+
+    @staticmethod
+    def calculate_risk_of_ruin(win_rate: float, reward_risk_ratio: float, risk_pct: float) -> float:
+        edge = (win_rate * reward_risk_ratio) - (1 - win_rate)
+        if edge <= 0:
+            return 1.0
+
+        stress_factor = min(max(risk_pct * 20, 0.01), 0.95)
+        ruin = max(0.0, min(1.0, (1 - edge) * stress_factor))
+        return round(ruin, 4)

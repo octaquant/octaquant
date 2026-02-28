@@ -23,7 +23,7 @@ def update_market_context(payload: MarketContextUpdate, db: Session = Depends(ge
     try:
         result = service.update_context(
             db,
-            user_id=user.id,
+            user=user,
             market=payload.selected_market,
             symbol=payload.selected_symbol,
             mode=payload.mode,

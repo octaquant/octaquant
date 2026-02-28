@@ -1,19 +1,22 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models import BotState, MarketContext, MarketType, TradeMode
-from app.schemas import MARKET_SYMBOLS
+from app.models import BotState, MarketContext, MarketType, SubscriptionPlan, TradeMode, User
+from app.schemas import MARKET_SYMBOLS, PLAN_PERMISSIONS
+from app.services import shared_worker
 from app.services.bot_manager import BotManager
 from app.services.risk_engine import UniversalRiskEngine
 from app.services.strategy_engine import StrategyEngine
 from app.services.volatility import is_tradeable
+from app.services.worker import UserBotWorker
 from backend.market_router import get_adapter
 
 
 class MarketContextService:
-    def __init__(self) -> None:
+    def __init__(self, worker: UserBotWorker | None = None) -> None:
         self.strategy_engine = StrategyEngine()
-        self.bot_manager = BotManager(self.strategy_engine)
+        self.worker = worker or shared_worker
+        self.bot_manager = BotManager(self.strategy_engine, self.worker)
         self.risk_engine = UniversalRiskEngine()
 
     def get_or_create_context(self, db: Session, user_id: int) -> tuple[MarketContext, BotState]:
@@ -30,12 +33,12 @@ class MarketContextService:
         db.flush()
         return context, bot_state
 
-    def update_context(self, db: Session, user_id: int, market: MarketType, symbol: str, mode: TradeMode, auto_filter: bool) -> dict:
+    def update_context(self, db: Session, user: User, market: MarketType, symbol: str, mode: TradeMode, auto_filter: bool) -> dict:
+        self._assert_plan_allows(user.plan, market, mode)
         if symbol not in MARKET_SYMBOLS[market]:
             raise ValueError(f'Invalid symbol {symbol} for market {market.value}')
 
-        context, bot_state = self.get_or_create_context(db, user_id)
-
+        context, bot_state = self.get_or_create_context(db, user.id)
         bot_state.mode = mode
         context.selected_market = market
         context.selected_symbol = symbol
@@ -46,11 +49,7 @@ class MarketContextService:
         db.refresh(context)
         db.refresh(bot_state)
 
-        return {
-            'context': context,
-            'bot_state': bot_state,
-            'restart': restart_result,
-        }
+        return {'context': context, 'bot_state': bot_state, 'restart': restart_result}
 
     def build_dashboard_payload(self, context: MarketContext, mode: TradeMode) -> dict:
         adapter = get_adapter(context.selected_market.value)
@@ -81,6 +80,14 @@ class MarketContextService:
         }
 
     @staticmethod
+    def _assert_plan_allows(plan: SubscriptionPlan, market: MarketType, mode: TradeMode):
+        permissions = PLAN_PERMISSIONS[plan]
+        if market not in permissions['markets']:
+            raise ValueError(f'Your {plan.value} plan does not include {market.value} market access')
+        if mode == TradeMode.LIVE and not permissions['live_trading']:
+            raise ValueError(f'Your {plan.value} plan does not allow live trading')
+
+    @staticmethod
     def _market_intelligence(market: MarketType, market_data: dict) -> dict:
         if market == MarketType.INDIAN:
             return {k: market_data[k] for k in ('oi', 'pcr', 'vix', 'gamma')}
@@ -92,8 +99,5 @@ class MarketContextService:
     def _crowd_psychology(market: MarketType, metrics: dict) -> dict:
         return {
             'market': market.value,
-            'heatmap': [
-                {'zone': key, 'intensity': value if isinstance(value, (int, float)) else 0.5}
-                for key, value in metrics.items()
-            ],
+            'heatmap': [{'zone': key, 'intensity': value if isinstance(value, (int, float)) else 0.5} for key, value in metrics.items()],
         }

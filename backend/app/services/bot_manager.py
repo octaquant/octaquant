@@ -1,10 +1,12 @@
-from app.models import BotState, MarketContext
+from app.models import BotState, MarketContext, TradeMode
 from app.services.strategy_engine import StrategyEngine
+from app.services.worker import UserBotWorker
 
 
 class BotManager:
-    def __init__(self, strategy_engine: StrategyEngine):
+    def __init__(self, strategy_engine: StrategyEngine, worker: UserBotWorker):
         self.strategy_engine = strategy_engine
+        self.worker = worker
 
     def safely_restart(self, bot_state: BotState, context: MarketContext) -> dict:
         stop_result = self.stop(bot_state)
@@ -20,12 +22,13 @@ class BotManager:
             'start': start_result,
         }
 
-    @staticmethod
-    def stop(bot_state: BotState) -> dict:
+    def stop(self, bot_state: BotState) -> dict:
         bot_state.enabled = False
+        self.worker.stop(bot_state.user_id)
         return {'status': 'stopped'}
 
-    @staticmethod
-    def start(bot_state: BotState) -> dict:
+    def start(self, bot_state: BotState) -> dict:
         bot_state.enabled = True
-        return {'status': 'running'}
+        self.worker.ensure_running(bot_state.user_id)
+        mode_note = 'paper trading' if bot_state.mode == TradeMode.PAPER else 'live mode placeholder'
+        return {'status': 'running', 'mode': mode_note}

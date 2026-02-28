@@ -163,3 +163,35 @@ Focused on building long-duration financial infrastructure centered on risk inte
 ## Disclaimer
 
 OctaQuant is a trading automation infrastructure. Users are responsible for their own capital decisions.
+
+## Backend SaaS API (FastAPI)
+
+The `backend/` service now includes deployable SaaS primitives:
+- JWT auth (`/api/v1/auth/register`, `/api/v1/auth/login`)
+- Subscription entitlements (`free`, `pro`, `elite`)
+- Encrypted API credential vault with replace + test endpoints
+- Multi-market context switching for Indian/Crypto/Forex
+- Per-user bot controls (start/stop, paper mode, live-mode placeholder)
+- Risk engine endpoint with position sizing + risk-of-ruin estimate
+- Background user workers for independent bot heartbeats
+
+### Local Run
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+### Required Environment Variables
+
+- `DATABASE_URL`
+- `JWT_SECRET`
+- `FERNET_KEY` (must be a valid Fernet key)
+- `ACCESS_TOKEN_EXPIRE_MINUTES` (optional)
+
+### Deployment
+
+- Docker image: `backend/Dockerfile`
+- Render blueprint: `backend/render.yaml`
+- Fly.io app config: `backend/fly.toml`

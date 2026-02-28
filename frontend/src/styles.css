@@ -2,6 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-slate-50 text-slate-900;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.architecture-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 3rem 1.25rem 4rem;
+  color: #dbeafe;
+  background: radial-gradient(circle at top right, #102760 0%, #030712 38%, #02030a 100%);
+  overflow: hidden;
+}
+
+.architecture-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 80%, transparent);
+}
+
+.hero,
+.content-section,
+.closing {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(5, 14, 34, 0.75);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.1), 0 14px 36px rgba(2, 6, 23, 0.65);
+}
+
+.content-section,
+.closing {
+  margin-top: 1.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #60a5fa;
+  font-size: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  font-weight: 700;
+}
+
+.hero h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  color: #93c5fd;
+}
+
+.hero-copy {
+  margin-top: 1rem;
+  max-width: 62ch;
+  color: #bfdbfe;
+}
+
+.back-button {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.content-section h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #e0f2fe;
+}
+
+.layer-grid,
+.info-grid {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.layer-card,
+.info-grid article {
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(4, 18, 46, 0.72);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.layer-card h4,
+.info-grid h4 {
+  color: #7dd3fc;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.layer-card ul {
+  margin-top: 0.7rem;
+  padding-left: 1rem;
+  color: #dbeafe;
+  font-size: 0.92rem;
+}
+
+.layer-card li + li {
+  margin-top: 0.45rem;
+}
+
+.flow-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.flow-node {
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(5, 26, 64, 0.8);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.flow-arrow {
+  color: #38bdf8;
+}
+
+.security-list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.security-list p {
+  border-left: 2px solid #38bdf8;
+  padding-left: 0.65rem;
+  color: #dbeafe;
+}
+
+.closing {
+  text-align: center;
+  font-size: clamp(1.1rem, 3vw, 1.45rem);
+  font-weight: 600;
+  color: #e0f2fe;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .architecture-page {
+    padding: 1.25rem 0.75rem 2.5rem;
+  }
+
+  .hero,
+  .content-section,
+  .closing {
+    padding: 1.25rem;
+  }
 }

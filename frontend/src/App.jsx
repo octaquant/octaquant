@@ -1,5 +1,4 @@
 import React from 'react';
-
 const betaFeatures = [
   'Paper Trading Access',
   'Multi-Market Switching',

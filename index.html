@@ -3,195 +3,236 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OctaQuant | Multi-Market Risk Intelligence Engine</title>
+    <title>OctaQuant | Multi-Market Risk Intelligence & Trading Automation Infrastructure</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              base: '#060b16',
-              panel: '#0b1222',
-              ink: '#c9d6ff',
-              muted: '#8a95b5',
-              line: '#1e2a44',
-              accent: '#5b8cff',
-              cyan: '#23d3ee',
+              obsidian: '#040811',
+              midnight: '#060f1f',
+              panel: '#0b172b',
+              edge: '#1a2d4c',
+              electric: '#2e7bff',
+              cyan: '#22d3ee',
+              slate: '#9cb3d6',
+              pearl: '#e8f0ff',
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
             },
             boxShadow: {
-              panel: '0 0 0 1px rgba(91,140,255,0.12), 0 20px 60px rgba(2,10,28,0.8)',
+              glow: '0 24px 80px rgba(7, 18, 40, 0.75), inset 0 0 0 1px rgba(46,123,255,0.15)',
+              accent: '0 14px 36px rgba(46,123,255,0.35)',
+            },
+            keyframes: {
+              rise: {
+                '0%': { opacity: '0', transform: 'translateY(16px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              pulseGrid: {
+                '0%, 100%': { opacity: '0.25' },
+                '50%': { opacity: '0.65' },
+              },
+            },
+            animation: {
+              rise: 'rise 700ms ease-out both',
+              pulseGrid: 'pulseGrid 5s ease-in-out infinite',
             },
           },
         },
       };
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
         background:
-          radial-gradient(circle at 15% 0%, rgba(35, 211, 238, 0.08), transparent 38%),
-          radial-gradient(circle at 85% 10%, rgba(91, 140, 255, 0.12), transparent 34%),
-          #060b16;
+          radial-gradient(circle at 15% 0%, rgba(34, 211, 238, 0.12), transparent 35%),
+          radial-gradient(circle at 85% 10%, rgba(46, 123, 255, 0.18), transparent 32%),
+          linear-gradient(140deg, #040811 0%, #060f1f 52%, #081226 100%);
+      }
+
+      .grid-overlay {
+        background-image:
+          linear-gradient(rgba(156, 179, 214, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(156, 179, 214, 0.06) 1px, transparent 1px);
+        background-size: 36px 36px;
       }
     </style>
   </head>
-  <body class="text-ink antialiased">
-    <div class="mx-auto max-w-7xl px-6 pb-20 pt-10 md:px-10 lg:px-12">
-      <header class="rounded-2xl border border-line bg-panel/70 p-6 shadow-panel backdrop-blur">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div class="space-y-4 max-w-3xl">
-            <p class="inline-flex rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-cyan uppercase">
-              Institutional Risk Infrastructure
+  <body class="min-h-screen text-slate antialiased">
+    <div class="relative overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 grid-overlay animate-pulseGrid"></div>
+
+      <div class="relative mx-auto max-w-7xl px-5 pb-20 pt-6 sm:px-8 lg:px-10">
+        <header class="animate-rise rounded-2xl border border-edge/80 bg-panel/80 px-5 py-5 shadow-glow backdrop-blur sm:px-8 sm:py-7">
+          <div class="flex items-center justify-between gap-4">
+            <p class="inline-flex rounded-full border border-electric/30 bg-electric/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan">
+              Multi-Market Risk Infrastructure
             </p>
-            <h1 class="text-3xl font-semibold leading-tight text-white md:text-5xl">
-              OctaQuant – Multi-Market Risk Intelligence Engine
-            </h1>
-            <p class="text-base text-ink/90 md:text-lg">
-              Building India’s First Retail Trap Detection &amp; Automated Risk Infrastructure.
-            </p>
-            <div class="flex flex-wrap gap-3 pt-1">
-              <a href="#architecture" class="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-400">View Architecture</a>
-              <a href="#strategy" class="rounded-lg border border-line px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-accent hover:text-white">Explore Strategy Engine</a>
+            <p class="text-xs font-medium uppercase tracking-[0.16em] text-slate/70">OctaQuant</p>
+          </div>
+        </header>
+
+        <main class="mt-6 space-y-6 sm:space-y-8">
+          <section class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow backdrop-blur sm:p-10">
+            <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+              <div>
+                <h1 class="text-3xl font-semibold leading-tight text-pearl sm:text-4xl lg:text-5xl">
+                  OctaQuant – Multi-Market Risk Intelligence Engine
+                </h1>
+                <p class="mt-4 max-w-2xl text-base leading-7 text-slate sm:text-lg">
+                  Detect Retail Traps. Quantify Risk. Automate Execution.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <a href="#how-it-works" class="rounded-xl bg-electric px-5 py-3 text-sm font-semibold text-white shadow-accent transition duration-300 hover:bg-blue-500">
+                    View Architecture
+                  </a>
+                  <a href="#saas" class="rounded-xl border border-edge bg-midnight/60 px-5 py-3 text-sm font-semibold text-pearl transition duration-300 hover:border-electric hover:text-white">
+                    Join Beta
+                  </a>
+                </div>
+              </div>
+              <div class="rounded-2xl border border-edge bg-midnight/70 p-5">
+                <p class="text-sm font-semibold uppercase tracking-[0.16em] text-slate/80">Core Outcomes</p>
+                <ul class="mt-4 space-y-3 text-sm leading-6 text-slate">
+                  <li class="rounded-lg border border-edge/80 bg-obsidian/60 px-4 py-3">Convert discretionary trading behavior into rules-based workflows.</li>
+                  <li class="rounded-lg border border-edge/80 bg-obsidian/60 px-4 py-3">Unify signal quality, exposure sizing, and execution governance.</li>
+                  <li class="rounded-lg border border-edge/80 bg-obsidian/60 px-4 py-3">Support market-specific models under one risk intelligence framework.</li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <ul class="grid gap-3 text-sm text-ink lg:max-w-sm">
-            <li class="rounded-lg border border-line bg-base/60 px-4 py-3">Detects Retail Traps</li>
-            <li class="rounded-lg border border-line bg-base/60 px-4 py-3">Calculates Real-Time Probability</li>
-            <li class="rounded-lg border border-line bg-base/60 px-4 py-3">Automates Risk-First Trading</li>
-          </ul>
-        </div>
-      </header>
+          </section>
 
-      <main class="mt-8 grid gap-6">
-        <section class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">Vision: Beyond Retail Reaction Cycles</h2>
-          <div class="mt-5 grid gap-4 md:grid-cols-2">
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="text-lg font-semibold text-white">Why 90% Traders Lose</h3>
-              <p class="mt-2 text-sm leading-7 text-muted">
-                Most discretionary behavior compounds cognitive bias: overtrading after wins, revenge after losses, and narrative anchoring during uncertainty. Without statistical framing, confidence replaces evidence.
-              </p>
-            </article>
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="text-lg font-semibold text-white">Emotional vs Probability Trading</h3>
-              <p class="mt-2 text-sm leading-7 text-muted">
-                Emotion-centric systems treat every setup as binary conviction. Probability-centric systems measure edge quality, distribution of outcomes, and decision confidence relative to regime context.
-              </p>
-            </article>
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="text-lg font-semibold text-white">Risk-of-Ruin Priority</h3>
-              <p class="mt-2 text-sm leading-7 text-muted">
-                Expected value is insufficient without sizing discipline. Risk-of-ruin must govern leverage, stop logic, and capital allocation to ensure sustainability through inevitable drawdown cycles.
-              </p>
-            </article>
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="text-lg font-semibold text-white">Volatility Regime Filtering</h3>
-              <p class="mt-2 text-sm leading-7 text-muted">
-                A valid strategy can underperform in the wrong volatility phase. Regime classification prevents deploying trend logic in compression or mean-reversion logic in expansion.
-              </p>
-            </article>
-          </div>
-        </section>
+          <section class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+            <h2 class="text-2xl font-semibold text-pearl">The Problem</h2>
+            <div class="mt-5 grid gap-4 md:grid-cols-3">
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-5">
+                <h3 class="font-semibold text-pearl">Why 90% of Traders Lose</h3>
+                <p class="mt-2 text-sm leading-7 text-slate">
+                  Most participants operate without tested position sizing rules, expectancy tracking, or drawdown controls. Performance variability is treated as noise rather than a measurable risk system variable.
+                </p>
+              </article>
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-5">
+                <h3 class="font-semibold text-pearl">Emotional vs Probabilistic Trading</h3>
+                <p class="mt-2 text-sm leading-7 text-slate">
+                  Emotional trading overweights recent outcomes and narrative conviction. Probabilistic trading evaluates distributions, confidence intervals, and regime suitability before allocating risk.
+                </p>
+              </article>
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-5">
+                <h3 class="font-semibold text-pearl">Risk-of-Ruin</h3>
+                <p class="mt-2 text-sm leading-7 text-slate">
+                  A strategy can remain statistically positive yet still fail if leverage and streak exposure are unmanaged. Risk-of-ruin modeling is fundamental to long-horizon survival.
+                </p>
+              </article>
+            </div>
+          </section>
 
-        <section id="architecture" class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">What OctaQuant Builds</h2>
-          <p class="mt-3 max-w-4xl text-sm leading-7 text-muted">
-            OctaQuant is a layered infrastructure model where each module contributes to uncertainty reduction, execution discipline, and scalable deployment.
-          </p>
-          <pre class="mt-5 overflow-x-auto rounded-xl border border-line bg-base p-4 text-xs leading-6 text-ink md:text-sm"><code>OctaQuant Risk Intelligence Stack
-├── Layer 1: Market Adapters
-│   ├── India: NIFTY, BANKNIFTY, Option Chain OI, PCR, India VIX
-│   ├── Crypto: BTC, ETH, funding rate, liquidation clusters
-│   └── Forex: XAUUSD, EURUSD, ATR + session volatility
-├── Layer 2: Strategy Engine
-├── Layer 3: Smart Money Divergence Model
-├── Layer 4: Volatility Regime Classifier
-├── Layer 5: Universal Risk Engine
-├── Layer 6: Paper & Live Execution System
-└── Layer 7: SaaS Multi-User Architecture</code></pre>
-        </section>
+          <section id="how-it-works" class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+            <h2 class="text-2xl font-semibold text-pearl">How It Works</h2>
+            <p class="mt-3 text-sm leading-7 text-slate">
+              OctaQuant architecture is organized as modular layers to separate data normalization, signal intelligence, risk controls, and order routing.
+            </p>
+            <div class="mt-5 rounded-2xl border border-edge bg-obsidian/70 p-4 text-sm leading-7 sm:p-6">
+              <div class="flex flex-col gap-3 font-medium text-pearl md:flex-row md:items-center md:justify-between">
+                <span class="rounded-lg border border-electric/40 bg-electric/10 px-4 py-2">Market Adapters</span>
+                <span class="hidden md:block text-electric">→</span>
+                <span class="rounded-lg border border-electric/40 bg-electric/10 px-4 py-2">Strategy Engine</span>
+                <span class="hidden md:block text-electric">→</span>
+                <span class="rounded-lg border border-electric/40 bg-electric/10 px-4 py-2">Risk Engine</span>
+                <span class="hidden md:block text-electric">→</span>
+                <span class="rounded-lg border border-electric/40 bg-electric/10 px-4 py-2">Execution Layer</span>
+              </div>
+            </div>
+          </section>
 
-        <section class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">Market Coverage</h2>
-          <div class="mt-5 grid gap-4 md:grid-cols-3">
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="font-semibold text-white">Indian Markets</h3>
-              <ul class="mt-3 space-y-2 text-sm text-muted">
-                <li>NIFTY</li><li>BANKNIFTY</li><li>Option Chain OI</li><li>PCR</li><li>VIX</li>
+          <section class="grid gap-6 lg:grid-cols-2">
+            <section class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+              <h2 class="text-2xl font-semibold text-pearl">Multi-Market Support</h2>
+              <div class="mt-5 space-y-4">
+                <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                  <h3 class="font-semibold text-pearl">Indian Markets</h3>
+                  <p class="mt-2 text-sm text-slate">NIFTY, BANKNIFTY</p>
+                </article>
+                <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                  <h3 class="font-semibold text-pearl">Crypto Markets</h3>
+                  <p class="mt-2 text-sm text-slate">BTC, ETH</p>
+                </article>
+                <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                  <h3 class="font-semibold text-pearl">Forex Markets</h3>
+                  <p class="mt-2 text-sm text-slate">XAUUSD, EURUSD</p>
+                </article>
+              </div>
+            </section>
+
+            <section id="strategy" class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+              <h2 class="text-2xl font-semibold text-pearl">Strategy Intelligence</h2>
+              <ul class="mt-5 space-y-3 text-sm leading-7 text-slate">
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3">Retail Trap Detection</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3">Smart Money Divergence</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3">Volatility Regime Classifier</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3">Gamma Cluster Awareness</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3">Monte Carlo Simulation</li>
               </ul>
-            </article>
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="font-semibold text-white">Crypto Markets</h3>
-              <ul class="mt-3 space-y-2 text-sm text-muted">
-                <li>BTC</li><li>ETH</li><li>Funding Rate</li><li>Liquidation Clusters</li>
-              </ul>
-            </article>
-            <article class="rounded-xl border border-line bg-base/60 p-5">
-              <h3 class="font-semibold text-white">Forex Markets</h3>
-              <ul class="mt-3 space-y-2 text-sm text-muted">
-                <li>Gold (XAUUSD)</li><li>EURUSD</li><li>ATR &amp; Session Volatility</li>
-              </ul>
-            </article>
-          </div>
-        </section>
+            </section>
+          </section>
 
-        <section id="strategy" class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">Strategy Intelligence Engine</h2>
-          <div class="mt-5 grid gap-4 md:grid-cols-2">
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Retail Trap Detection Model</h3><p class="mt-2 text-sm leading-7 text-muted">Detects breakout failures and liquidity sweeps where late retail positioning faces asymmetric downside.</p></article>
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Smart Money Distribution Logic</h3><p class="mt-2 text-sm leading-7 text-muted">Maps non-confirmation between price extension and participation signatures to infer distribution and absorption zones.</p></article>
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Gamma Cluster Awareness</h3><p class="mt-2 text-sm leading-7 text-muted">Integrates option-driven strike concentration effects to identify pinning, magnet behavior, and high-friction execution zones.</p></article>
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Expiry Day Volatility Model</h3><p class="mt-2 text-sm leading-7 text-muted">Adjusts threshold and execution aggression during expiry windows where volatility expansion and mean reversion alternate rapidly.</p></article>
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Monte Carlo Simulation</h3><p class="mt-2 text-sm leading-7 text-muted">Runs scenario-path simulation for returns, drawdowns, and strategy fragility under changing market microstructures.</p></article>
-            <article class="rounded-xl border border-line bg-base/60 p-5"><h3 class="font-semibold text-white">Risk of Ruin &amp; Survival Probability</h3><p class="mt-2 text-sm leading-7 text-muted">Transforms hit rate, payoff ratio, and leverage into forward survival constraints to preserve deployable capital.</p></article>
-          </div>
-        </section>
+          <section id="saas" class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+            <h2 class="text-2xl font-semibold text-pearl">SaaS Model</h2>
+            <div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                <h3 class="font-semibold text-pearl">Paper Trading</h3>
+                <p class="mt-2 text-sm text-slate">Simulation environment for deployment validation and risk policy testing.</p>
+              </article>
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                <h3 class="font-semibold text-pearl">Live Trading</h3>
+                <p class="mt-2 text-sm text-slate">Execution with pre-trade checks, exposure limits, and fail-safe governance.</p>
+              </article>
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                <h3 class="font-semibold text-pearl">API Integration</h3>
+                <p class="mt-2 text-sm text-slate">Secure broker/API connectivity with market adapter abstraction.</p>
+              </article>
+              <article class="rounded-2xl border border-edge bg-midnight/70 p-4">
+                <h3 class="font-semibold text-pearl">Subscription Plans</h3>
+                <p class="mt-2 text-sm text-slate">Tiered access for individual traders, teams, and institutional operations.</p>
+              </article>
+            </div>
+          </section>
 
-        <section class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">SaaS Architecture</h2>
-          <ul class="mt-4 grid gap-3 text-sm text-muted md:grid-cols-2">
-            <li class="rounded-lg border border-line bg-base/60 p-4">Multi-user support with account isolation</li>
-            <li class="rounded-lg border border-line bg-base/60 p-4">Encrypted API key management and secure routing</li>
-            <li class="rounded-lg border border-line bg-base/60 p-4">Subscription model with role-based feature access</li>
-            <li class="rounded-lg border border-line bg-base/60 p-4">Paper trading mode for controlled validation</li>
-            <li class="rounded-lg border border-line bg-base/60 p-4">Live trading mode with governance checks</li>
-            <li class="rounded-lg border border-line bg-base/60 p-4">Market switching system with auto volatility filter</li>
-          </ul>
-        </section>
+          <section class="grid gap-6 lg:grid-cols-2">
+            <section class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+              <h2 class="text-2xl font-semibold text-pearl">Roadmap</h2>
+              <ol class="mt-5 space-y-3 text-sm text-slate">
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3"><span class="font-semibold text-pearl">Phase 1:</span> Core Engine</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3"><span class="font-semibold text-pearl">Phase 2:</span> Multi-Market</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3"><span class="font-semibold text-pearl">Phase 3:</span> SaaS Launch</li>
+                <li class="rounded-xl border border-edge bg-midnight/70 px-4 py-3"><span class="font-semibold text-pearl">Phase 4:</span> Institutional</li>
+              </ol>
+            </section>
 
-        <section class="grid gap-6 lg:grid-cols-2">
-          <div class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-            <h2 class="text-2xl font-semibold text-white">Impact</h2>
-            <ul class="mt-4 space-y-3 text-sm text-muted">
-              <li>From emotional trading to probabilistic decision systems.</li>
-              <li>From guessing to data-driven execution policy.</li>
-              <li>From gambling behavior to structured capital survival.</li>
-              <li>From retail trader mindset to risk engineering discipline.</li>
-            </ul>
-          </div>
-          <div class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-            <h2 class="text-2xl font-semibold text-white">Roadmap</h2>
-            <ol class="mt-4 space-y-3 text-sm text-muted list-decimal list-inside">
-              <li>Phase 1: Core engine</li>
-              <li>Phase 2: Multi-market deployment</li>
-              <li>Phase 3: SaaS launch</li>
-              <li>Phase 4: Institutional capital integration</li>
-              <li>Phase 5: Hedge fund infrastructure</li>
-            </ol>
-          </div>
-        </section>
+            <section class="animate-rise rounded-3xl border border-edge/80 bg-panel/70 p-6 shadow-glow sm:p-8">
+              <h2 class="text-2xl font-semibold text-pearl">Founder</h2>
+              <p class="mt-4 text-base text-slate">
+                <span class="font-semibold text-pearl">Ravi Kumar Rai</span><br />
+                Risk Systems Architect
+              </p>
+              <p class="mt-4 text-sm leading-7 text-slate">
+                Focused on building robust risk analytics, strategy governance, and execution systems for multi-market trading environments.
+              </p>
+            </section>
+          </section>
+        </main>
 
-        <section class="rounded-2xl border border-line bg-panel/60 p-6 shadow-panel md:p-8">
-          <h2 class="text-2xl font-semibold text-white">Founder</h2>
-          <p class="mt-3 text-base text-ink"><span class="font-semibold text-white">Ravi Kumar Rai</span> — Founder &amp; Risk Systems Architect</p>
-          <p class="mt-2 max-w-3xl text-sm leading-7 text-muted">
-            Building long-term financial infrastructure focused on risk intelligence, robust execution systems, and capital preservation frameworks—not short-term signal distribution.
-          </p>
-        </section>
-      </main>
-
-      <footer class="mt-8 rounded-2xl border border-line bg-panel/70 px-6 py-5 text-sm text-muted shadow-panel">
-        OctaQuant is a trading automation infrastructure. Users are responsible for their own capital decisions.
-      </footer>
+        <footer class="mt-8 rounded-2xl border border-edge/80 bg-panel/75 px-5 py-5 text-xs leading-6 text-slate shadow-glow sm:px-7">
+          Disclaimer: OctaQuant provides analytics and trading infrastructure software. It does not provide investment advice or guaranteed returns. Trading involves significant risk, and users remain fully responsible for all capital and execution decisions.
+        </footer>
+      </div>
     </div>
   </body>
 </html>
